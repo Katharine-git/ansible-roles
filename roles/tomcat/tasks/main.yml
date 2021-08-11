@@ -31,11 +31,16 @@
     path: "{{ tomcat_archive_dest }}"
     state: absent
 
+- name: Symlink install directory
+  file: src=/opt/apache-tomcat-10.0.0 path=/usr/share/tomcat state=link
+
+- name: Change ownership of Tomcat installation
+  file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+
 - name: copy config files
   template:
     src: server.xml.j2
     dest: /opt/tomcat/conf/server.xml
-  notify: restart tomcat
 
 - name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
