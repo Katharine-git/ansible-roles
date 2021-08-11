@@ -35,7 +35,6 @@
   template:
     src: server.xml.j2
     dest: /opt/tomcat/conf/server.xml
-  notify: restart tomcat
 
 - name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
