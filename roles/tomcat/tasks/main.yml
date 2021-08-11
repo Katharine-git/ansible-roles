@@ -32,7 +32,7 @@
     state: absent
 
 - name: Symlink install directory
-  file: src=/opt/apache-tomcat-10.0.0 path=/usr/share/tomcat state=link
+  file: src=/opt/tomcat path=/usr/share/tomcat state=link
 
 - name: Change ownership of Tomcat installation
   file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
