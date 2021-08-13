@@ -3,10 +3,7 @@
 - name: Check if tomcat is installed
   command: rpm -q tomcat
   register: tomcat_check
-
-- name: Execute script if foo.rpm is not installed
-  command: somescript
-  when: rpm_check.stdout.find('is not installed') != -1
+  warn: false
 
 - name: Add tomcat group
   group:
