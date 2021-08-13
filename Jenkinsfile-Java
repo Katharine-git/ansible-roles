@@ -13,6 +13,7 @@ pipeline{
         }  
         stage('Maven Build') {
             steps {
+                dir('HelloWorld-Tomcat')
                 sh 'mvn clean install'
             }
         }
