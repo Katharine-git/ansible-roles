@@ -8,7 +8,7 @@ pipeline{
     stages {
         stage('checkout') {
             steps {
-                git 'https://github.com/Katharine-git/HelloWorld-Tomcat.git'
+                git 'https://github.com/Katharine-git/ansible-roles.git'
             }
         }  
         stage('Maven Build') {
