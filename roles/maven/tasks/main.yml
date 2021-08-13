@@ -1,0 +1,12 @@
+---
+- name: Download Apache Maven 
+  get_url: 
+    url: "{{ src_url }}"
+    dest: "{{ dest_path }}"
+
+- name: Untar Maven 
+  shell: chdir=/tmp creates={{dest_url}} tar -zxf apache-maven-{{ ver }}-bin.tar.gz -C {{ dest_path }}
+
+- name: Update path for maven use
+  shell: export PATH={{dest_url}}/bin:$PATH
+

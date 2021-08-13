@@ -1,0 +1,3 @@
+src_url: https://downloads.apache.org/maven/maven-3/{{ver}}/binaries/apache-maven-{{ver}}-bin.tar.gz
+dest_url: /opt/apache-maven-{{ver}}
+dest_path: /opt
