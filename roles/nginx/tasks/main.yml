@@ -1,18 +1,18 @@
 ---
-- name: Add tomcat nginx
+- name: Add nginx group
   group:
     name: nginx
 
-- name: Add "tomcat" user
+- name: Add "nginx" user
   user:
     name: nginx
     group: nginx
     home: /etc/nginx
 
-- name: Add epel-release repo
-  yum:
-    name: epel-release
-    state: present
+#- name: Add epel-release repo
+#  yum:
+#    name: epel-release
+#    state: present
 
 - name: Install nginx
   yum:
