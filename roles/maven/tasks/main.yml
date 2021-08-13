@@ -2,7 +2,7 @@
 - name: Download Apache Maven 
   get_url: 
     url: "{{ src_url }}"
-    dest: "{{ dest_path }}"
+    dest: /opt
 
 - name: Extract Apache Maven archive
   unarchive:
