@@ -9,10 +9,8 @@
     group: nginx
     home: /etc/nginx
 
-#- name: Add epel-release repo
-#  yum:
-#    name: epel-release
-#    state: present
+- name: Add epel-release repo
+  command:  sudo amazon-linux-extras install epel
 
 - name: Install nginx
   yum:
