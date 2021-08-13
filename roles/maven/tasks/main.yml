@@ -11,5 +11,5 @@
     remote_src: yes
 
 - name: Update path for maven use
-  shell: export PATH={{dest_url}}/bin:$PATH
+  shell: export PATH=/opt/apache-maven-{{ver}}/bin:$PATH
 
