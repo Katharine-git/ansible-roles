@@ -2,8 +2,8 @@
 # tasks file for tomcat
 - name: Check if tomcat is installed
   command: rpm -q tomcat
+    warn: false
   register: tomcat_check
-  warn: false
 
 - name: Add tomcat group
   group:
