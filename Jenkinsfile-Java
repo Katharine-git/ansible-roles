@@ -8,12 +8,11 @@ pipeline{
     stages {
         stage('checkout') {
             steps {
-                git 'https://github.com/Katharine-git/ansible-roles.git'
+                git 'https://github.com/Katharine-git/HelloWorld-Tomcat.git'
             }
         }  
         stage('Maven Build') {
             steps {
-                dir('HelloWorld-Tomcat')
                 sh 'mvn clean install'
             }
         }
