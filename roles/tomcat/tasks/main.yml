@@ -1,10 +1,5 @@
 ---
 # tasks file for tomcat
-- name: Check if tomcat is installed
-  command: rpm -q tomcat
-  register: tomcat_check
-  warn: false
-
 - name: Add tomcat group
   group:
     name: tomcat
@@ -19,7 +14,6 @@
   get_url:
     url: "{{ tomcat_archive_url }}"
     dest: /opt
-  when: tomcat_check.stdout.find('is not installed') != -1
 
 - name: Extract tomcat archive
   unarchive:
@@ -28,17 +22,14 @@
     owner: tomcat
     group: tomcat
     remote_src: yes
-  when: tomcat_check.stdout.find('is not installed') != -1
 
 - name: Rename tomcat folder
   shell: mv /opt/apache-tomcat-10.0.0 /opt/tomcat
-  when: tomcat_check.stdout.find('is not installed') != -1
 
 - name: Clean up tar files
   file:
     path: "{{ tomcat_archive_dest }}"
     state: absent
-  when: tomcat_check.stdout.find('is not installed') != -1
 #- name: Symlink install directory
 #  file: src=/opt/apache-tomcat-10.0.0 path=/usr/share/tomcat state=link
 
@@ -48,8 +39,7 @@
 - name: copy config files
   template:
     src: server.xml.j2
-    dest: /opt/tomcat/conf/server.xml
-  notify: restart tomcat 
+    dest: /opt/tomcat/conf/server.xml 
 
 - name: Start and enable tomcat
   shell: nohup sh /opt/tomcat/bin/startup.sh &
