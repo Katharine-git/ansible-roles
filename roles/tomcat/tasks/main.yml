@@ -39,8 +39,7 @@
 - name: copy config files
   template:
     src: server.xml.j2
-    dest: /opt/tomcat/conf/server.xml
-  notify: restart tomcat 
+    dest: /opt/tomcat/conf/server.xml 
 
 - name: Start and enable tomcat
   shell: nohup sh /opt/tomcat/bin/startup.sh &
