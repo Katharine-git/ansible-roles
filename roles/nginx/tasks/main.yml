@@ -11,6 +11,7 @@
 
 - name: Add epel-release repo
   command:  sudo amazon-linux-extras install epel
+  become: yes
 
 - name: Install nginx
   yum:
