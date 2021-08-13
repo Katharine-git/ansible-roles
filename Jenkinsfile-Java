@@ -1,0 +1,27 @@
+pipeline{
+
+    environment {
+        PATH = "/opt/apache-maven-3.8.1/bin:$PATH"
+    }
+
+    agent any
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/Katharine-git/HelloWorld-Tomcat.git'
+            }
+        }  
+        stage('Maven Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Jenkins Deploy') {
+            steps {
+                ansiblePlaybook credentialsId: 'aws-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.ini', playbook: 'tomcat-deploy.yml'
+            }
+        
+        }
+        
+    }
+}
