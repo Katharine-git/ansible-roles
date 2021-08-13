@@ -18,7 +18,7 @@ pipeline{
         }
         stage('Jenkins Deploy') {
             steps {
-                ansiblePlaybook credentialsId: 'aws-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.ini', playbook: 'tomcat-deploy.yml'
+                ansiblePlaybook credentialsId: 'aws-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.ini', playbook: 'tomcat-deploy-1.yml'
             }
         
         }
