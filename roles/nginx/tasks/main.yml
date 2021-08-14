@@ -10,7 +10,7 @@
     home: /etc/nginx
 
 - name: Add epel-release repo
-  command:  sudo amazon-linux-extras install epel
+  command:  sudo amazon-linux-extras install epel -y
   become: yes
 
 - name: Install nginx
