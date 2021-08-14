@@ -18,6 +18,9 @@
     name: nginx
     state: present
 
+- name: Change ownership of nginx installation
+  file: path=/etc/nginx/ owner=nginx group=nginx state=directory recurse=yes
+
 - name: start nginx
   service:
     name: nginx
