@@ -46,8 +46,17 @@
 - name: copy config files
   template:
     src: server.xml.j2
-    dest: /opt/tomcat/conf/server.xml
-  notify: restart tomcat 
+    dest: /opt/tomcat/conf/server.xml 
+
+- name: check if tomcat is running
+  shell: ps aux | grep '{{ grep_string }}' | awk '{print $2}'
+  ignore_errors: yes
+  changed_when: false
+  register: service_apache_status
+
+- name: kill process is tomcat is still running
+  shell: kill $(ps aux | grep '{{ grep_string }}' | awk '{print $2}')
+  when: service_apache_status.stdout != ''
 
 - name: Start and enable tomcat
   shell: nohup sh /opt/tomcat/bin/startup.sh &
@@ -63,3 +72,6 @@
 #  template: src=iptables-save dest=/etc/sysconfig/iptables
 #  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'"
 #  notify: restart iptables
+
+
+echo $(ps aux | grep tomcat | awk ' { print $2 } ')
