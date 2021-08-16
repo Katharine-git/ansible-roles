@@ -17,6 +17,7 @@
   yum:
     name: nginx
     state: present
+  become_user: nginx
 
 - name: Change ownership of nginx installation
   file: path=/etc/nginx/ owner=nginx group=nginx state=directory recurse=yes
@@ -26,6 +27,7 @@
     name: nginx
     state: started
   become: yes
+  become_user: nginx
 
 - name: create configuration directories
   file:
@@ -36,11 +38,13 @@
   loop:
     - private
     - certs
+  become_user: nginx
 
 - name: configure nginx as reverse proxy
   template:
     src: nginx.conf-copy
     dest: /etc/nginx/nginx.conf
+  become_user: nginx
 
 - name: configure nginx
   template:
@@ -53,11 +57,13 @@
      - {src: 'Makefile',dest: '{{ certs_path }}' }
      - {src: 'nginx-selfsigned.crt',dest: '{{ certs_path }}' }
      - {src: 'renew-dummy-cert',dest: '{{ certs_path }}' }
+  become_user: nginx
 
 - name: restart nginx
   service:
     name: nginx
     state: restarted
   become: yes
+  become_user: nginx
 
 

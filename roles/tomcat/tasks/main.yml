@@ -50,29 +50,17 @@
 - name: Stop tomcat
   shell: nohup sh /opt/tomcat/bin/shutdown.sh &
   become: true
+  become_user: tomcat
   
 - name: copy config files
   template:
     src: server.xml.j2
     dest: /opt/tomcat/conf/server.xml 
 
-#- name: check if tomcat is running
-#  shell: ps aux | grep /opt/tomcat | awk '{print $2}'
-#  ignore_errors: yes
-#  changed_when: false
-#  register: service_apache_status
-  
-#- debug: msg="Check if Apache is running {{ service_apache_status }}"
-#- debug: msg="service_apache_status.stdout != '' =  {{ service_apache_status.stdout != ''}}"
-
-#- name: kill process is tomcat is still running
-#  shell: kill $(ps aux | grep /opt/tomcat | awk '{print $2}')
-#  when: service_apache_status.stdout != ''
-
 - name: Start and enable tomcat
   shell: nohup sh /opt/tomcat/bin/startup.sh &
   become: true
-
+  become_user: tomcat
 #- name: Install Tomcat init script
 #  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
