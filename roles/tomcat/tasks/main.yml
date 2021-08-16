@@ -12,15 +12,16 @@
     group: tomcat
     home: /opt
 
-- name: Download Tomcat
-  get_url:
-    url: "{{ tomcat_archive_url }}"
-    dest: /opt
-
 #Check if 'tomcat' folder exists
 - name: Check tomcat directory existence
   stat: path=/opt/tomcat
   register: tomcat_dir
+  
+- name: Download Tomcat
+  get_url:
+    url: "{{ tomcat_archive_url }}"
+    dest: /opt
+  when: not tomcat_dir.stat.exists
 
 - name: Extract tomcat archive
   unarchive:
