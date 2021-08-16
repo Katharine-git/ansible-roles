@@ -50,7 +50,7 @@
 - name: Stop tomcat
   shell: nohup sh /opt/tomcat/bin/shutdown.sh &
   become: true
-  become_user: tomcat
+#  become_user: tomcat
   
 - name: copy config files
   template:
@@ -60,7 +60,7 @@
 - name: Start and enable tomcat
   shell: nohup sh /opt/tomcat/bin/startup.sh &
   become: true
-  become_user: tomcat
+#  become_user: tomcat
 #- name: Install Tomcat init script
 #  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
