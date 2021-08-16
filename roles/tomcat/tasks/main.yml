@@ -1,4 +1,7 @@
 ---
+- name: Apply yum update
+  command: sudo yum update -y
+
 - name: Add tomcat group
   group:
     name: tomcat
