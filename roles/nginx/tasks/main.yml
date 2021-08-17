@@ -26,7 +26,6 @@
     name: nginx
     state: started
   become: yes
-  become_user: nginx
 
 - name: create configuration directories
   file:
