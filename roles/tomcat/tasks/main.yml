@@ -30,7 +30,7 @@
     owner: tomcat
     group: tomcat
     remote_src: yes
-    mode:777
+    mode: 777
   when: not tomcat_dir.stat.exists
 
 - name: Rename tomcat folder
