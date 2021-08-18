@@ -27,8 +27,8 @@
   unarchive:
     src: "{{ tomcat_archive_dest }}"
     dest: /opt
-    owner: tomcat
-    group: tomcat
+#    owner: tomcat
+#    group: tomcat
     remote_src: yes
   when: not tomcat_dir.stat.exists
 
