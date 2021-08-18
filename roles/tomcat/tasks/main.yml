@@ -27,9 +27,10 @@
   unarchive:
     src: "{{ tomcat_archive_dest }}"
     dest: /opt
-#    owner: tomcat
-#    group: tomcat
+    owner: tomcat
+    group: tomcat
     remote_src: yes
+    mode:777
   when: not tomcat_dir.stat.exists
 
 - name: Rename tomcat folder
@@ -44,8 +45,8 @@
 #- name: Symlink install directory
 #  file: src=/opt/apache-tomcat-10.0.0 path=/usr/share/tomcat state=link
 
-#- name: Change ownership of Tomcat installation
-#  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+- name: Change ownership of Tomcat installation
+  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
 - name: Stop tomcat
   shell: nohup sh /opt/tomcat/bin/shutdown.sh &
