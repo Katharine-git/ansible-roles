@@ -1,32 +1,39 @@
 ---
+#Create NGINX group
 - name: Add nginx group
   group:
     name: nginx
 
+#create 'nginx' user and add to NGINX group
 - name: Add "nginx" user
   user:
     name: nginx
     group: nginx
     home: /etc/nginx
 
+#Install epel release
 - name: Add epel-release repo
   command:  sudo amazon-linux-extras install epel -y
   become: yes
 
+#Install NGINX
 - name: Install nginx
   yum:
     name: nginx
     state: present
 
+#Change ownership to 'nginx' user
 - name: Change ownership of nginx installation
   file: path=/etc/nginx/ owner=nginx group=nginx state=directory recurse=yes
 
+#Start NGINX
 - name: start nginx
   service:
     name: nginx
     state: started
   become: yes
 
+#Create config directories 
 - name: create configuration directories
   file:
     path: /etc/ssl/{{ item }}
@@ -37,11 +44,13 @@
     - private
     - certs
 
+#Copying NGINX config files
 - name: configure nginx as reverse proxy
   template:
     src: nginx.conf-copy
     dest: /etc/nginx/nginx.conf
 
+#Configure NGINX as reverese proxy
 - name: configure nginx
   template:
     src: '{{ item.src }}'
@@ -54,6 +63,7 @@
      - {src: 'nginx-selfsigned.crt',dest: '{{ certs_path }}' }
      - {src: 'renew-dummy-cert',dest: '{{ certs_path }}' }
 
+#Restart NGINX
 - name: restart nginx
   service:
     name: nginx
